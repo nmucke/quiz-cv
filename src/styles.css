@@ -1,0 +1,233 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --fire-orange: #ff6b00;
+  --fire-red: #ff4500;
+  --fire-gold: #ffd700;
+  --bg-dark: #0a0a0f;
+  --bg-gradient: linear-gradient(180deg, #0a0a0f 0%, #1a0a05 50%, #0a0a0f 100%);
+  --glow-fire: 0 0 20px var(--fire-orange), 0 0 40px var(--fire-red);
+  --glow-gold: 0 0 15px var(--fire-gold);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-dark);
+  color: #e8e8e8;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--bg-gradient);
+  z-index: -2;
+  pointer-events: none;
+}
+
+#fire-canvas {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fire-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#particles-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+main {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem 12rem;
+}
+
+.section {
+  margin-bottom: 5rem;
+  padding: 2rem;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.section:hover {
+  box-shadow: var(--glow-fire);
+  transform: translateY(-2px);
+}
+
+.hero {
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-shadow: var(--glow-fire);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow: 0 0 20px var(--fire-orange), 0 0 40px var(--fire-red);
+  }
+  50% {
+    text-shadow: 0 0 30px var(--fire-orange), 0 0 60px var(--fire-red);
+  }
+}
+
+.tagline {
+  font-size: 1.25rem;
+  color: var(--fire-gold);
+  margin-top: 1rem;
+  text-shadow: var(--glow-gold);
+  font-weight: 500;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.15em;
+  color: var(--fire-orange);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px var(--fire-orange);
+}
+
+.bio-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 107, 0, 0.3);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover {
+  border-color: var(--fire-orange);
+  box-shadow: var(--glow-fire);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 107, 0, 0.3);
+  background: #111;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.video-wrapper:hover {
+  border-color: var(--fire-orange);
+  box-shadow: var(--glow-fire);
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a0a05 0%, #0a0a0f 100%);
+  color: var(--fire-orange);
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px var(--fire-orange);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 107, 0, 0.15);
+  color: var(--fire-gold);
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  background: rgba(255, 107, 0, 0.3);
+  box-shadow: var(--glow-gold);
+  transform: scale(1.05);
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.explosion-particle {
+  z-index: 9999;
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" fill="none">
+  <rect width="400" height="400" fill="#1a1a1a" stroke="#ff6b00" stroke-width="2" stroke-dasharray="8 4" rx="8"/>
+  <path d="M120 160 L160 120 L200 160 L240 120 L280 160" stroke="#ff6b00" stroke-width="2" fill="none" opacity="0.6"/>
+  <circle cx="160" cy="200" r="30" stroke="#ff6b00" stroke-width="2" fill="none" opacity="0.6"/>
+  <text x="200" y="280" text-anchor="middle" fill="#ff6b00" font-family="system-ui, sans-serif" font-size="18" opacity="0.8">Add your image</text>
+</svg>
