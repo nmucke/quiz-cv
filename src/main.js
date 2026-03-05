@@ -8,6 +8,9 @@ import {
   initScrollExplosions,
 } from './effects/particles.js';
 
+const base = import.meta.env.BASE_URL;
+const asset = (path) => base + path.replace(/^\//, '');
+
 // Render content from config
 function renderContent() {
   document.getElementById('hero-name').textContent = config.name;
@@ -22,11 +25,11 @@ function renderContent() {
     item.className = 'gallery-item';
     item.style.animationDelay = `${i * 0.1}s`;
     const image = document.createElement('img');
-    image.src = img.src;
+    image.src = asset(img.src);
     image.alt = img.alt;
     image.loading = 'lazy';
     image.onerror = () => {
-      image.src = '/images/placeholder.svg';
+      image.src = asset('/images/placeholder.svg');
     };
     item.appendChild(image);
     galleryGrid.appendChild(item);
@@ -36,8 +39,8 @@ function renderContent() {
   const videoWrapper = document.getElementById('video-wrapper');
   if (config.video?.src) {
     const video = document.createElement('video');
-    video.src = config.video.src;
-    video.poster = config.video.poster || '';
+    video.src = asset(config.video.src);
+    video.poster = config.video.poster ? asset(config.video.poster) : '';
     video.controls = true;
     video.playsInline = true;
     video.preload = 'metadata';
