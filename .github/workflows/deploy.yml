@@ -33,6 +33,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Verify asset paths
+        run: |
+          echo "Built asset paths:"
+          grep -E 'src=|href=.*assets' dist/index.html || true
+          if ! grep -q '/quiz-cv/assets/' dist/index.html; then
+            echo "ERROR: Asset paths should include /quiz-cv/ base path"
+            exit 1
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
