@@ -1,6 +1,12 @@
 import config from '../config.js';
 import { initFire } from './effects/fire.js';
-import { initSparkles, triggerExplosion, initScrollExplosions } from './effects/particles.js';
+import {
+  initSparkles,
+  initGlitter,
+  triggerExplosion,
+  triggerConfettiBurst,
+  initScrollExplosions,
+} from './effects/particles.js';
 
 // Render content from config
 function renderContent() {
@@ -11,9 +17,10 @@ function renderContent() {
   // Gallery
   const galleryGrid = document.getElementById('gallery-grid');
   galleryGrid.innerHTML = '';
-  config.images.forEach((img) => {
+  config.images.forEach((img, i) => {
     const item = document.createElement('div');
     item.className = 'gallery-item';
+    item.style.animationDelay = `${i * 0.1}s`;
     const image = document.createElement('img');
     image.src = img.src;
     image.alt = img.alt;
@@ -45,31 +52,26 @@ function renderContent() {
   // Contact
   const contactLinks = document.getElementById('contact-links');
   contactLinks.innerHTML = '';
-  if (config.contact?.email) {
-    const a = document.createElement('a');
-    a.href = `mailto:${config.contact.email}`;
-    a.className = 'contact-link';
-    a.textContent = config.contact.email;
-    contactLinks.appendChild(a);
-  }
-  if (config.contact?.linkedin) {
-    const a = document.createElement('a');
-    a.href = config.contact.linkedin;
-    a.className = 'contact-link';
-    a.textContent = 'LinkedIn';
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    contactLinks.appendChild(a);
-  }
-  if (config.contact?.github) {
-    const a = document.createElement('a');
-    a.href = config.contact.github;
-    a.className = 'contact-link';
-    a.textContent = 'GitHub';
-    a.target = '_blank';
-    a.rel = 'noopener noreferrer';
-    contactLinks.appendChild(a);
-  }
+  const contactItems = [
+    { key: 'email', href: (c) => `mailto:${c}`, text: (c) => c },
+    { key: 'linkedin', href: (c) => c, text: () => 'LinkedIn' },
+    { key: 'github', href: (c) => c, text: () => 'GitHub' },
+  ];
+  contactItems.forEach(({ key, href, text }, i) => {
+    const val = config.contact?.[key];
+    if (val) {
+      const a = document.createElement('a');
+      a.href = href(val);
+      a.className = 'contact-link';
+      a.textContent = text(val);
+      a.style.animationDelay = `${i * 0.1}s`;
+      if (key !== 'email') {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      }
+      contactLinks.appendChild(a);
+    }
+  });
 }
 
 // Initialize effects
@@ -79,12 +81,25 @@ function initEffects() {
 
   initFire(fireContainer);
   initSparkles(particlesContainer);
+  initGlitter(particlesContainer);
   initScrollExplosions();
 
-  // Initial explosion on load
+  // Big explosion + confetti on load
   setTimeout(() => {
-    triggerExplosion(window.innerWidth / 2, window.innerHeight / 2);
-  }, 500);
+    triggerExplosion(window.innerWidth / 2, window.innerHeight / 2, { size: 1.5, particleCount: 80 });
+  }, 300);
+  setTimeout(() => {
+    triggerConfettiBurst(window.innerWidth / 2, window.innerHeight / 3);
+  }, 600);
+  setTimeout(() => {
+    triggerExplosion(window.innerWidth * 0.25, window.innerHeight / 2, { size: 0.8 });
+    triggerExplosion(window.innerWidth * 0.75, window.innerHeight / 2, { size: 0.8 });
+  }, 900);
+
+  // Click anywhere to explode
+  document.addEventListener('click', (e) => {
+    triggerExplosion(e.clientX, e.clientY, { size: 0.6, particleCount: 40 });
+  });
 }
 
 renderContent();
