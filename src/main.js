@@ -59,6 +59,7 @@ function renderContent() {
     { key: 'email', href: (c) => `mailto:${c}`, text: (c) => c },
     { key: 'linkedin', href: (c) => c, text: () => 'LinkedIn' },
     { key: 'github', href: (c) => c, text: () => 'GitHub' },
+    { key: 'facebook', href: (c) => c, text: () => 'Facebook' },
   ];
   contactItems.forEach(({ key, href, text }, i) => {
     const val = config.contact?.[key];

@@ -11,10 +11,12 @@ export default {
     email: "bananabro@pub.quiz",
     linkedin: "https://www.linkedin.com/in/nanna-barnkob-b01702124/",
     github: "https://github.com/chrislgarry/Apollo-11",
+    facebook: "https://www.facebook.com/thor.junker"
   },
   images: [
-    { src: "/images/placeholder.svg", alt: "Add your photo" },
-    { src: "/images/placeholder.svg", alt: "Add another photo" },
+    { src: "/images/mig.png", alt: "Add your photo" },
+    { src: "/images/nanna.png", alt: "Add another photo" },
+    { src: "/images/thor.png", alt: "Add another photo" },
   ],
   video: {
     src: "/video/lol.mp4",
